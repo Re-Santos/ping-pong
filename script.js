@@ -2,13 +2,13 @@ const canvasE1=document.querySelector("canvas"),
       canvasCtx=canvasE1.getContext("2d"),
       gapX=10
 
-const lineWidth = 15
+
 
 const campo={
     w:window.innerWidth,
     h:window.innerHeight,
     draw:function(){
-        //Desenha o campo
+        
         canvasCtx.fillStyle ="#286047"
         canvasCtx.fillRect(0,0,this.w,this.h)
     }
@@ -26,7 +26,7 @@ const linha={
 const raqueteEsquerda={
     x:gapX,
     y:100,
-    w:lineWidth.w,
+    w:linha.w,
     h:200,
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
@@ -34,15 +34,29 @@ const raqueteEsquerda={
 
     }
 }
+
 const raqueteDireita={
     x:campo.w-linha.w-gapX,
     y:100,
-    w:line.w,
+    w:linha.w,
     h:200,
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.fillRect(this.x,this.y,this.w,this.h)
 
+    }
+}
+
+const bola={
+    x:300,
+    y:200,
+    r:20,
+    draw:function(){
+        canvasCtx.fillStyle = "#ffffff"
+        canvasCtx.beginPath()
+        canvasCtx.arc(this.x,this.y,this.r,0,2*Math.PI,false)
+        canvasCtx.fill()
+    
     }
 }
 
@@ -60,16 +74,12 @@ function draw(){
     linha.draw()
     raqueteEsquerda.draw()
     raqueteDireita.draw()
-
+    bola.draw()
+}
 
 
  
-//Desenha bolinha
-
-    canvasCtx.beginPath()
-    canvasCtx.arc(200,300,20,0,2*Math.PI,false)
-    canvasCtx.fill()
-
+   
 //Desenha o placar
 
     canvasCtx.font = "bold 72px Arial"
@@ -79,7 +89,7 @@ function draw(){
     canvasCtx.fillText("3", window.innerWidth / 4,50)
     canvasCtx.fillText("1", window.innerWidth / 4 + window.innerWidth / 2,50)
 
-}
+
 
 setup()
 draw()
