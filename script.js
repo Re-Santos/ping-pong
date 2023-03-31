@@ -37,6 +37,15 @@ function draw(){
     canvasCtx.arc(200,300,20,0,2*Math.PI,false)
     canvasCtx.fill()
 
+//Desenha o placar
+
+    canvasCtx.font = "bold 72px Arial"
+    canvasCtx.textAlign = "center"
+    canvasCtx.textBaseline = "top"
+    canvasCtx.fillStyle = "#01341D"
+    canvasCtx.fillText("3", window.innerWidth / 4,50)
+    canvasCtx.fillText("1",window.innerWidth / 2,50)
+
 }
 
 setup()
