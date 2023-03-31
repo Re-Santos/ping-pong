@@ -1,5 +1,6 @@
 const canvasE1=document.querySelector("canvas"),
-      canvasCtx=canvasE1.getContext("2d")
+      canvasCtx=canvasE1.getContext("2d"),
+      gapX=10
 
 const lineWidth = 15
 
@@ -22,6 +23,30 @@ const linha={
     }
 }
 
+const raqueteEsquerda={
+    x:gapX,
+    y:100,
+    w:lineWidth.w,
+    h:200,
+    draw:function(){
+        canvasCtx.fillStyle = "#ffffff"
+        canvasCtx.fillRect(this.x,this.y,this.w,this.h)
+
+    }
+}
+const raqueteDireita={
+    x:campo.w-linha.w-gapX,
+    y:100,
+    w:line.w,
+    h:200,
+    draw:function(){
+        canvasCtx.fillStyle = "#ffffff"
+        canvasCtx.fillRect(this.x,this.y,this.w,this.h)
+
+    }
+}
+
+
 function setup(){
     canvasE1.width = campo.w
     canvasCtx.width = campo.w
@@ -33,16 +58,12 @@ function draw(){
    
     campo.draw()
     linha.draw()
-   
+    raqueteEsquerda.draw()
+    raqueteDireita.draw()
 
-//Desenha a raquete esquerda
 
-    canvasCtx.fillRect(10,100,lineWidth,200)
 
-//Desenha a raquete direita
-
-    canvasCtx.fillRect(window.innerWidth-lineWidth-10,200,lineWidth,200)
-
+ 
 //Desenha bolinha
 
     canvasCtx.beginPath()
