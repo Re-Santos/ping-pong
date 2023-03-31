@@ -100,8 +100,26 @@ function draw(){
     
 }
 
- 
-setup()
-draw()
 
-window.setInterval(draw, 1000/60)
+window.animateFrame = (function (){
+    return(
+        window.requestAnimationFrame||
+        window.webkitRequestAnimationFrame||
+        window.mozRequestAnimationFrame||
+        window.oRequestAnimationFrame||
+        window.msRequestAnimationFrame||
+        function (callback){
+            return window.setInterval(draw, 1000/60)
+        }
+
+        
+    )
+})()
+
+    function main(){
+        animateFrame(main)
+        draw()
+    }
+
+    setup()
+    main()
