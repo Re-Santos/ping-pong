@@ -3,16 +3,28 @@ const canvasE1=document.querySelector("canvas"),
 
 const lineWidth = 15
 
-function setup(){
-    canvasE1.width = window.innerWidth
-    canvasCtx.width = window.innerWidth
-    canvasE1.height = window.innerHeight
-    canvasCtx.height = window.innerHeight
+const campo={
+    w:window.innerWidth,
+    h:window.innerHeight,
+
+    draw:function(){
+        //Desenha o campo
+        canvasCtx.fillStyle ="#286047"
+        canvasCtx.fillRect(0,0,window.innerWidth,window.innerHeight)
+    }
+
 }
-//Desenha o campo
+
+function setup(){
+    canvasE1.width = campo.w
+    canvasCtx.width = campo.w
+    canvasE1.height = campo.h
+    canvasCtx.height = campo.h
+}
+
 function draw(){
-    canvasCtx.fillStyle ="#286047"
-    canvasCtx.fillRect(0,0,window.innerWidth,window.innerHeight)
+   
+    campo.draw()
 
     canvasCtx.fillStyle = "#ffffff"
 
@@ -44,7 +56,7 @@ function draw(){
     canvasCtx.textBaseline = "top"
     canvasCtx.fillStyle = "#01341D"
     canvasCtx.fillText("3", window.innerWidth / 4,50)
-    canvasCtx.fillText("1",window.innerWidth / 2,50)
+    canvasCtx.fillText("1", window.innerWidth / 4 + window.innerWidth / 2,50)
 
 }
 
