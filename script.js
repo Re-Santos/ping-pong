@@ -2,7 +2,7 @@ const canvasE1=document.querySelector("canvas"),
       canvasCtx=canvasE1.getContext("2d"),
       gapX=10
 
-
+const mouse = {x:0, y: 0}
 
 const campo={
     w:window.innerWidth,
@@ -25,13 +25,16 @@ const linha={
 
 const raqueteEsquerda={
     x:gapX,
-    y:100,
+    y:0,
     w:linha.w,
     h:200,
+    _move: function (){
+        this.y=mouse.y - this.h/2
+    },
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.fillRect(this.x,this.y,this.w,this.h)
-
+        this._move()
     }
 }
 
@@ -123,3 +126,10 @@ window.animateFrame = (function (){
 
     setup()
     main()
+
+    canvasE1.addEventListener("mousemove", function(e){
+        mouse.x = e.pageX
+        mouse.y = e.pageY
+
+        
+    })
