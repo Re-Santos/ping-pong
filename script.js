@@ -65,13 +65,19 @@ const bola={
     x:300,
     y:200,
     r:20,
+    velocidade:5,
+    _move: function(){
+        this.x += 1*this.velocidade
+        this.y += 1*this.velocidade
+    },
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.beginPath()
         canvasCtx.arc(this.x,this.y,this.r,0,2*Math.PI,false)
         canvasCtx.fill()
-    
-    }
+        
+        this._move()
+    },
 }
 
 
@@ -89,16 +95,13 @@ function draw(){
     linha.draw()
     raqueteEsquerda.draw()
     raqueteDireita.draw()
-    bola.draw()
     placar.draw()
+    bola.draw()
+    
 }
 
-
  
-   
-//Desenha o placar
-
-   
-
 setup()
 draw()
+
+window.setInterval(draw, 1000/60)
