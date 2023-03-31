@@ -47,6 +47,20 @@ const raqueteDireita={
     }
 }
 
+const placar={
+    jogador:1,
+    computador:2,
+    draw:function(){
+        canvasCtx.font = "bold 72px Arial"
+        canvasCtx.textAlign = "center"
+        canvasCtx.textBaseline = "top"
+        canvasCtx.fillStyle = "#01341D"
+        canvasCtx.fillText(this.jogador, window.innerWidth / 4,50)
+        canvasCtx.fillText(this.computador, window.innerWidth / 4 + window.innerWidth / 2,50)
+    
+    }
+}
+
 const bola={
     x:300,
     y:200,
@@ -68,6 +82,7 @@ function setup(){
     canvasCtx.height = campo.h
 }
 
+
 function draw(){
    
     campo.draw()
@@ -75,6 +90,7 @@ function draw(){
     raqueteEsquerda.draw()
     raqueteDireita.draw()
     bola.draw()
+    placar.draw()
 }
 
 
@@ -82,14 +98,7 @@ function draw(){
    
 //Desenha o placar
 
-    canvasCtx.font = "bold 72px Arial"
-    canvasCtx.textAlign = "center"
-    canvasCtx.textBaseline = "top"
-    canvasCtx.fillStyle = "#01341D"
-    canvasCtx.fillText("3", window.innerWidth / 4,50)
-    canvasCtx.fillText("1", window.innerWidth / 4 + window.innerWidth / 2,50)
-
-
+   
 
 setup()
 draw()
