@@ -31,6 +31,12 @@ function draw(){
 
     canvasCtx.fillRect(window.innerWidth-lineWidth-10,200,lineWidth,200)
 
+//Desenha bolinha
+
+    canvasCtx.beginPath()
+    canvasCtx.arc(200,300,20,0,2*Math.PI,false)
+    canvasCtx.fill()
+
 }
 
 setup()
