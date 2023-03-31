@@ -6,13 +6,20 @@ const lineWidth = 15
 const campo={
     w:window.innerWidth,
     h:window.innerHeight,
-
     draw:function(){
         //Desenha o campo
         canvasCtx.fillStyle ="#286047"
-        canvasCtx.fillRect(0,0,window.innerWidth,window.innerHeight)
+        canvasCtx.fillRect(0,0,this.w,this.h)
     }
+}
 
+const linha={
+    w:15,
+    h:campo.h,
+    draw:function(){
+        canvasCtx.fillStyle = "#ffffff"
+        canvasCtx.fillRect(campo.w/2 - this.w/2,0 ,this.w,this.h )
+    }
 }
 
 function setup(){
@@ -25,15 +32,8 @@ function setup(){
 function draw(){
    
     campo.draw()
-
-    canvasCtx.fillStyle = "#ffffff"
-
-    const x = window.innerWidth/2 - lineWidth/2
-    const y = 0
-    const w = lineWidth
-    const h = window.innerHeight
-
-    canvasCtx.fillRect(x, y, w, h)
+    linha.draw()
+   
 
 //Desenha a raquete esquerda
 
