@@ -75,10 +75,10 @@ const bola={
     direcaoX:1,
     direcaoY:1,
     _calcposicao: function (){
-        //Verifica as laterais superiores e inferiores do campo
+        //Verifica as laterais superior e inferior do campo
         if (
-        (this.y - this.r <0 && thiis.direcaoY<0) ||
-        (this.y>campo.h - this.r && direcaoY>0) ){
+        (this.y - this.r <0 && this.direcaoY<0) ||
+        (this.y>campo.h - this.r && this.direcaoY>0) ){
         // rebate a bola invertendo o sinal do eixo Y
             this._reverseY()
         }
@@ -92,8 +92,8 @@ const bola={
         //-1* -1 = 1
     _reverseY: function (){
         this.direcaoY *= -1
-        }
     },
+    
     _move: function (){
         this.x += this.direcaoX * this.velocidade
         this.y += this.direcaoY * this.velocidade
@@ -109,7 +109,7 @@ const bola={
         this._move()
     },
 
-
+}
 
 function setup(){
     canvasE1.width = campo.w
