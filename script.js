@@ -72,19 +72,43 @@ const bola={
     y:200,
     r:20,
     velocidade:5,
-    _move: function(){
-        this.x += 1*this.velocidade
-        this.y += 1*this.velocidade
+    direcaoX:1,
+    direcaoY:1,
+    _calcposicao: function (){
+        //Verifica as laterais superiores e inferiores do campo
+        if (
+        (this.y - this.r <0 && thiis.direcaoY<0) ||
+        (this.y>campo.h - this.r && direcaoY>0) ){
+        // rebate a bola invertendo o sinal do eixo Y
+            this._reverseY()
+        }
     },
-    draw:function(){
+        //1 * -1 = -1
+        //-1* -1 = 1
+    _reverseX: function (){
+        this.direcaoX *= -1
+    },
+        //1 * -1 = -1
+        //-1* -1 = 1
+    _reverseY: function (){
+        this.direcaoY *= -1
+        }
+    },
+    _move: function (){
+        this.x += this.direcaoX * this.velocidade
+        this.y += this.direcaoY * this.velocidade
+    },
+
+    draw:function (){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.beginPath()
         canvasCtx.arc(this.x,this.y,this.r,0,2*Math.PI,false)
         canvasCtx.fill()
         
+        this._calcposicao()
         this._move()
     },
-}
+
 
 
 function setup(){
