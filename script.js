@@ -82,7 +82,7 @@ const bola={
     direcaoY:1,
     _calcposicao: function (){
         //Verifica se o jogador fez um ponto (x > que a largura do campo)
-        if(this.x > campo.w){
+        if(this.x > campo.w - this.r-raqueteDireita.w-gapX){
         //Verifica se a raquete direita, está na posição y da bola.
             if(this.y + this.r > raqueteDireita.y && 
                 this.y - this.r < raqueteDireita.y + raqueteDireita.h){
@@ -91,8 +91,23 @@ const bola={
             }else{
                 //pontuar o jogador
                 placar.acrescentaPontoJogador()
+                this._centralizaBola()
             }
+       
         }
+         // verifica se o jogador fez um ponto
+         if(this.x<this.r+raqueteEsquerda.w+gapX){
+            //verifica se a raquete esquerda está na posiçãoy da bola
+            if(this.y+this.r>raqueteEsquerda.y && 
+            this.y-this.r<raqueteEsquerda.y+raqueteEsquerda.h){
+                //rebate a bola invertendo o sinal de x
+                this._reverseX()
+            }else{
+                //pontua o jogador
+                placar.acrescentaPontoJogador()
+                this._centralizaBola()
+            }
+         }
         //Verifica as laterais superior e inferior do campo
         if (
         (this.y - this.r <0 && this.direcaoY<0) ||
@@ -112,6 +127,12 @@ const bola={
         this.direcaoY *= -1
     },
     
+    _centralizaBola: function(){
+        this.x=field.w/2
+        this.y=field.h/2
+
+    },
+
     _move: function (){
         this.x += this.direcaoX * this.velocidade
         this.y += this.direcaoY * this.velocidade
