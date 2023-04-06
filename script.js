@@ -43,9 +43,20 @@ const raqueteDireita={
     y:100,
     w:linha.w,
     h:200,
+    speed:5,
     _move: function(){
+        if(this.y+this.h/2<bola.y+bola.r){
+            this.y += this.speed
+        }else{
+            this.y -+this.speed
+        }
         this.y = bola.y
     },
+
+    speedUp: function(){
+        this.speed +=2
+    },
+
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.fillRect(this.x,this.y,this.w,this.h)
@@ -127,7 +138,14 @@ const bola={
         this.direcaoY *= -1
     },
     
+    _velocidadeBola: function(){
+        this.velocidade += 2
+    },
+
     _centralizaBola: function(){
+        this._velocidadeBola()
+        raqueteDireita.speedUp()
+
         this.x=field.w/2
         this.y=field.h/2
 

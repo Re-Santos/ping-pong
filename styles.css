@@ -3,3 +3,10 @@
     margin: 0;
     padding: 0;
 }
+
+body h1 {
+   font-style: bold;
+   background-color: lightgreen;
+   text-align:center ;
+    
+}
