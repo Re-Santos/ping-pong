@@ -1,17 +1,17 @@
 const canvasE1=document.querySelector("canvas"),
       canvasCtx=canvasE1.getContext("2d"),
-      gapX=10
+      gapX=10;
 
-const mouse = {x:0, y: 0}
+const mouse = {x:0, y: 0};
 
 const campo={
     w:window.innerWidth,
     h:window.innerHeight,
     draw:function(){
         
-        canvasCtx.fillStyle ="#286047"
+        canvasCtx.fillStyle = "#44bd32";
         canvasCtx.fillRect(0,0,this.w,this.h)
-    }
+    },
 }
 
 const linha={
@@ -20,7 +20,7 @@ const linha={
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.fillRect(campo.w/2 - this.w/2,0 ,this.w,this.h )
-    }
+    },
 }
 
 const raqueteEsquerda={
@@ -43,9 +43,20 @@ const raqueteDireita={
     y:100,
     w:linha.w,
     h:200,
+    velocidade:5,
     _move: function(){
-        this.y = bola.y
+        if(this.y+this.h/2<bola.y+bola.r){
+            this.y += this.velocidade
+        }else{
+            this.y -=this.velocidade
+        }
+        
     },
+
+    velocidadeRaquete: function(){
+        this.velocidade +=2
+    },
+
     draw:function(){
         canvasCtx.fillStyle = "#ffffff"
         canvasCtx.fillRect(this.x,this.y,this.w,this.h)
@@ -54,14 +65,17 @@ const raqueteDireita={
 }
 
 const placar={
-    jogador:1,
-    computador:2,
+    jogador:0,
+    computador:0,
     acrescentaPontoJogador: function(){
         this.jogador ++
     },
-    acrescentaPontoComputdor: function(){
+    acrescentaPontoComputador: function(){
         this.computador ++
     },
+
+ 
+
     draw:function(){
         canvasCtx.font = "bold 72px Arial"
         canvasCtx.textAlign = "center"
@@ -69,10 +83,13 @@ const placar={
         canvasCtx.fillStyle = "#01341D"
         canvasCtx.fillText(this.jogador, window.innerWidth / 4,50)
         canvasCtx.fillText(this.computador, window.innerWidth / 4 + window.innerWidth / 2,50)
-    
-    }
+
+     
+    },
+
 }
 
+     
 const bola={
     x:300,
     y:200,
@@ -82,7 +99,7 @@ const bola={
     direcaoY:1,
     _calcposicao: function (){
         //Verifica se o jogador fez um ponto (x > que a largura do campo)
-        if(this.x > campo.w){
+        if(this.x > campo.w - this.r-raqueteDireita.w-gapX){
         //Verifica se a raquete direita, está na posição y da bola.
             if(this.y + this.r > raqueteDireita.y && 
                 this.y - this.r < raqueteDireita.y + raqueteDireita.h){
@@ -91,8 +108,23 @@ const bola={
             }else{
                 //pontuar o jogador
                 placar.acrescentaPontoJogador()
+                this._centralizaBola()
             }
+       
         }
+         // verifica se o computador fez um ponto (x<0)
+         if(this.x<this.r+raqueteEsquerda.w+gapX){
+            //verifica se a raquete esquerda está na posição y da bola
+            if(this.y+this.r>raqueteEsquerda.y && 
+            this.y-this.r<raqueteEsquerda.y+raqueteEsquerda.h){
+                //rebate a bola invertendo o sinal de x
+                this._reverseX()
+            }else{
+                //pontua o jogador
+                placar.acrescentaPontoComputador()
+                this._centralizaBola()
+            }
+         }
         //Verifica as laterais superior e inferior do campo
         if (
         (this.y - this.r <0 && this.direcaoY<0) ||
@@ -112,6 +144,20 @@ const bola={
         this.direcaoY *= -1
     },
     
+    _velocidadeBola: function(){
+        this.velocidade += 2
+    },
+
+    _centralizaBola: function(){
+        this._velocidadeBola()
+        raqueteDireita.velocidadeRaquete()
+
+        this.x=campo.w/2
+        this.y=campo.h/2
+
+    },
+  
+
     _move: function (){
         this.x += this.direcaoX * this.velocidade
         this.y += this.direcaoY * this.velocidade

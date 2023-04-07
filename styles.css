@@ -3,3 +3,10 @@
     margin: 0;
     padding: 0;
 }
+
+body h1 {
+   font-style: bold;
+   background-color: rgb(65, 245, 65);
+   text-align:center ;
+    
+}
