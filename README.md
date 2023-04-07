@@ -34,7 +34,7 @@ Acesse o deploy: https://re-santos.github.io/ping-pong/
 <linha de comando><br>
 🔜 Implementação futura:<br>
 
-Futuramente implantar funções que determinam limite de pontuação para que o jogo se encerre.<br>
+Implantar funções que determinam limite de pontuação para que o jogo se encerre.<br>
 Mensagens para informar ao jogador quem ganhou o jogo.<br>
 Botão para reiniciar o jogo.<br>
 
